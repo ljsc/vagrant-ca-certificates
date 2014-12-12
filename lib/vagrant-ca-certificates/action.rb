@@ -1,7 +1,7 @@
 require 'vagrant/action/builtin/call'
 require_relative 'action/is_enabled'
 require_relative 'action/only_once'
-require_relative 'action/symlink_omnibus_bundle'
+require_relative 'action/update_omnibus_bundle'
 require_relative 'action/update_certificates'
 require_relative 'action/upload_certificates'
 
