@@ -12,6 +12,11 @@ module VagrantPlugins
         require_relative 'cap/redhat/update_certificates'
         Cap::Redhat::UpdateCertificates
       end
+
+      guest_capability 'fedora', 'update_certificates' do
+        require_relative 'cap/fedora/update_certificates'
+        Cap::Fedora::UpdateCertificates
+      end
     end
   end
 end
