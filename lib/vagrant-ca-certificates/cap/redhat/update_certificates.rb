@@ -6,18 +6,12 @@ module VagrantPlugins
         module UpdateCertificates
           def self.update_certificates(machine)
             ca_certs = machine.config.ca_certificates.certs_path
-            ca_bundle = '/etc/pki/tls/certs/ca-bundle.crt'
 
-            # Assume that all of the certificates have been uploaded and just concatenate
-            # them to the proper certificate bundle in /etc/pki/tls/cacerts.
-            #
-            # TODO: make idempotent.
-            #
-            # Currently this will not remove any previously installed vagrant certificate and
-            # will append a copy of the uploaded certificates each time provision is run. If
-            # you run provision multiple time then you will see the certificates duplicated
-            # in the ca-cundle.crt file.
-            machine.communicate.sudo("find #{ca_certs} -maxdepth 1 -type f -exec cat {} >> #{ca_bundle} \\;")
+            # TODO: (jbellone) Fix support for older versions of RHEL. We unfortunately
+            # still have a need to spin instances that are EL5 and this only seems to
+            # work on EL6 and EL7.
+            machine.communicate.sudo("mv #{ca_certs}/* /etc/pki/ca-trust/source/anchors/")
+            machine.communicate.sudo('update-ca-trust extract')
           end
         end
       end
