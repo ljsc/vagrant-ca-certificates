@@ -10,10 +10,10 @@ module VagrantPlugins
         end
 
         def call(env)
-          @machine = env[:machine]          
-          if @machine.guest.capability?(:update_certificates)
+          m = env[:machine]
+          if m.guest.capability?(:update_certificates)
             env[:ui].info I18n.t("vagrant_ca_certificates.certificate.update.pre")
-            @machine.guest.capability(:update_certificates)  
+            m.guest.capability(:update_certificates)
             env[:ui].info I18n.t("vagrant_ca_certificates.certificate.update.post")
           else
             env[:ui].error I18n.t("vagrant_ca_certificates.certificate.update.not_supported")
