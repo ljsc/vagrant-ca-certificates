@@ -33,7 +33,7 @@ module VagrantPlugins
         builder = Proc.new do |b|
           b.use Vagrant::Action::Builtin::Call, IsEnabled do |env, b2|
             next unless env[:result]
-            b2.use SymlinkOmnibusBundle
+            b2.use UpdateOmnibusBundle
           end
         end
 

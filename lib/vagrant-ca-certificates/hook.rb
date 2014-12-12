@@ -20,7 +20,7 @@ module VagrantPlugins
         # we also need to do some special leg work to ensure that Chef
         # will work against our newly minted certificate trusts.
         if defined?(VagrantPlugins::Omnibus::Action::InstallChef)
-          hook.before VagrantPlugins::Omnibus::Action::InstallChef, Action.configure(before: true)
+          hook.after VagrantPlugins::Omnibus::Action::InstallChef, Action.configure
           hook.after VagrantPlugins::Omnibus::Action::InstallChef, Action.configure_symlinks
         end
       end
