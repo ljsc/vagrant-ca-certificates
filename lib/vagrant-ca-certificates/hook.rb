@@ -15,11 +15,14 @@ module VagrantPlugins
           hook.after Vagrant::Action::Builtin::SyncedFolders, Action.configure
         end
 
-        # configure the certificates before vagrant-omnibus
+        # Configure the certificates prior to vagrant-omnibus executing.
+        # Because of how the Omnibus packages embed certificate bundles
+        # we also need to do some special leg work to ensure that Chef
+        # will work against our newly minted certificate trusts.
         if defined?(VagrantPlugins::Omnibus::Action::InstallChef)
-          hook.after VagrantPlugins::Omnibus::Action::InstallChef, Action.configure
+          hook.before VagrantPlugins::Omnibus::Action::InstallChef, Action.configure(before: true)
+          hook.after VagrantPlugins::Omnibus::Action::InstallChef, Action.configure_symlinks
         end
-
       end
     end
   end
