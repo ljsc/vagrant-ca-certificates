@@ -2,6 +2,9 @@ en:
   vagrant_ca_certificates:
     not_enabled: |-
       CA certificate configuration is NOT enabled.
+    omnibus:
+      update_links: |-
+        Updating Omnibus installer symbolic links at '%{path}'        
     certificate:
       upload:
         pre: |-
