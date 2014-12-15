@@ -30,14 +30,12 @@ module VagrantPlugins
       # @param opts [Hash] The options to be passed to {OnlyOnce}.
       # @option (see OnlyOnce::#initalize)
       def self.configure_symlinks(opts = {})
-        builder = Proc.new do |b|
+        Vagrant::Action::Builder.new.tap do |b|
           b.use Vagrant::Action::Builtin::Call, IsEnabled do |env, b2|
             next unless env[:result]
             b2.use UpdateOmnibusBundle
           end
         end
-
-        Vagrant::Action::Builder.build(OnlyOnce, opts, &builder)
       end
     end
   end

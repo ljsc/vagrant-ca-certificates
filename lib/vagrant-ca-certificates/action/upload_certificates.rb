@@ -9,11 +9,13 @@ module VagrantPlugins
         end
 
         def call(env)
-          @machine = env[:machine]
-          config = @machine.config.ca_certificates
+          @app.call(env)
+
+          m = env[:machine]
+          config = m.config.ca_certificates
           certs_path = config.certs_path
 
-          @machine.communicate.tap do |vm|
+          m.communicate.tap do |vm|
             env[:ui].info I18n.t("vagrant_ca_certificates.certificate.upload.pre", path: certs_path)
             vm.sudo("mkdir -p '#{certs_path}'", error_check: false)
             vm.sudo("rm -rf '#{certs_path}'/*", error_check: false)

@@ -4,7 +4,7 @@ en:
       CA certificate configuration is NOT enabled.
     omnibus:
       update_links: |-
-        Updating Omnibus installer symbolic links at '%{path}'        
+        Updating Omnibus installer symbolic links to '%{path}'        
     certificate:
       upload:
         pre: |-
