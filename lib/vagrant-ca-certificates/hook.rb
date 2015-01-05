@@ -7,10 +7,8 @@ module VagrantPlugins
         require_relative 'action'
 
         hook.after Vagrant::Action::Builtin::Provision, Action.configure
-        hook.after Vagrant::Action::Builtin::Provision, Action.configure_symlinks
 
         if defined?(VagrantPlugins::Omnibus::Action::InstallChef)
-          hook.before VagrantPlugins::Omnibus::Action::InstallChef, Action.configure
           hook.before VagrantPlugins::Omnibus::Action::InstallChef, Action.configure_symlinks
         end
       end
