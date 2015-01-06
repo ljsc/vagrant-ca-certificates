@@ -8,5 +8,8 @@ end
 
 group :plugins do
   gem "vagrant-ca-certificates", path: "."
+  gem "vagrant-omnibus"
+  gem "vagrant-proxyconf"
+  gem "vagrant-cachier"
 end
 
