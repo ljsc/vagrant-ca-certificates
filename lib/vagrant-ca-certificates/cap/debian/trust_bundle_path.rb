@@ -4,7 +4,7 @@ module VagrantPlugins
       module Debian
         module TrustBundlePath
           def self.trust_bundle_path(m)
-            return '/etc/pki/ssl/cert.pem' unless m.config.ca_certificates.trust_bundle_path
+            return '/etc/ssl/certs/ca-certificates.crt' unless m.config.ca_certificates.trust_bundle_path
             m.config.ca_certificates.trust_bundle_path
           end
         end
