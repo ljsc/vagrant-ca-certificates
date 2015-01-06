@@ -22,9 +22,14 @@ module VagrantPlugins
 
           trust_bundle_path = m.guest.capability(:trust_bundle_path)
           embedded_path = File.join(m.config.ca_certificates.omnibus_path, 'embedded/ssl/cert.pem')
+	  tbp_exists = m.communicate.execute("[[ -f #{embedded_path} ]]", error_check: false)
 
-          env[:ui].info I18n.t('vagrant_ca_certificates.certificate.update.pre', path: trust_bundle_path)
-          m.communicate.sudo("ln -fsn #{trust_bundle_path} #{embedded_path}")
+	  if tbp_exists == 0
+            m.communicate.sudo("ln -fsn #{trust_bundle_path} #{embedded_path}")
+            env[:ui].info I18n.t('vagrant_ca_certificates.omnibus.update_links', path: trust_bundle_path)
+	  else
+	    env[:ui].warn I18n.t('vagrant_ca_certificates.omnibus.cert_not_found')
+	  end
         end
       end
     end

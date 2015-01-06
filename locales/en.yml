@@ -5,6 +5,8 @@ en:
     omnibus:
       update_links: |-
         Updating Omnibus installer symbolic links to '%{path}'        
+      cert_not_found: |-
+        Warning: Cert doesn't exist. Was Omnibus installed?
     certificate:
       upload:
         pre: |-

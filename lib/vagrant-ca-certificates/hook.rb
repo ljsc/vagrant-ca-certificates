@@ -9,7 +9,7 @@ module VagrantPlugins
         hook.after Vagrant::Action::Builtin::Provision, Action.configure
 
         if defined?(VagrantPlugins::Omnibus::Action::InstallChef)
-          hook.before VagrantPlugins::Omnibus::Action::InstallChef, Action.configure_symlinks
+          hook.after VagrantPlugins::Omnibus::Action::InstallChef, Action.configure_symlinks
         end
       end
     end
